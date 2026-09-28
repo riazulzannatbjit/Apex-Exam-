@@ -1,0 +1,39 @@
+//Question9a
+ SOQL inside loop is bad parctice can hit 'governor limit
+ DML inside loop also  hit givernpr limits 
+
+
+ //Question 9b.
+
+ public static void updateContacts(List<Account> accounts) {
+    Set<Id> accId = new Set<Id>();
+
+
+List<Contact> contacts = [
+SELECT Id, AccountId, Description
+FROM Contact
+WHERE AccountId = :acc.Id
+];
+for(Account acc: accounts){
+for (Contact con : acc.contacts) {
+if (acc.Industry == 'Technology') {
+con.Description = 'Technology Customer';
+
+}
+}
+     accId .add(con.AccountId);
+}
+update accId;
+}
+
+//Question 9c.
+well if we need to upadte only the description 
+ for that we can use  map & from here wecan compare oldmap & new 
+ to update account
+
+ //Question 9d.
+ using idempotent logic
+ no  SOQL,DML inside loop
+ update only the ones that are needed 
+
+ 

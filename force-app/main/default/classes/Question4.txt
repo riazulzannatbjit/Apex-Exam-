@@ -1,0 +1,45 @@
+//Question 4a
+In this scenario with with sharing  will  happen the record  level sharing 
+but if we use NOT sharing so  it will not respect users access permission the user can see all the records 
+ in QUERy we can use WITH_USER_MODE for the 
+user permission set  gets protected .
+
+
+//Question4b.
+public with sharing customerservice{
+
+    public static List<Customer_Assessment__c> getrecordscustomer(Id assesmentId_c, List<Customer_Assessment__c> newCus){
+         Set<Id> cusId = new Set<Id>();
+         List<Customer_Assessment__c> cus =[
+            SELECT Name,Id,Risk_Score__c,
+             Internal_Comment__c,Approval_Status__c
+             FROM Customer_Assessment__c WHERE 
+             Id  IN : assesmentId_c
+             WITH USER_MODE
+         ];
+
+         Map<Id,Customer_Assessment__c> custo=new  Map<Id,Customer_Assessment__c>();
+         for(Customer_Assessment__c cust : newCus ){
+            if(cust.Approval_Status__c != oldMap.Approval_Status__c){
+               custo.add(cust);
+            }
+         }
+         update custo;
+
+
+    }
+
+
+
+
+}
+
+//QUEStion4c.
+for Apex sEcurity we need to use with sharing ,
+ & also WITH USER_MODE 
+
+
+ //QUestion 4d.
+ If the class doesn't consider the running user's access , it will affect the security of users ,
+ so some user permisssion can't be  protected , to solvethis Iwill use the WITH_USER_MODE also WITH sharing
+ 

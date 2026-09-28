@@ -1,0 +1,123 @@
+//Question 6a.
+
+
+public class AccountTierBatch implements 
+     Database.Batchable <Account>,
+     Database.Stateful{
+
+public Database.QueryLocator satrt(
+    Database.BatchableContext bc)
+
+{
+ return Database.getQueryLocator(
+    [SELECT Id,Name,Customer_Tier__c,Amount
+    FROM Account 
+    WHERE status = 'Active'
+    WITH USER_MODE ];
+ )
+
+
+
+}
+
+public void execute(Database.BatchableContext bc ,List<Account> acc){
+    //Logic
+}
+public void finish (
+    // message 
+)
+
+
+
+
+
+
+
+
+
+     }
+     in Batch apex class the query is written inside the start method & main logic is implemented inside the execute & 
+     in finish the final message like System.debug ()
+
+
+
+
+
+//Question6b.
+public class AccountTierBatch implements 
+     Database.Batchable <Account>,
+     Database.Stateful{
+
+public Database.QueryLocator satrt(
+    Database.BatchableContext bc)
+
+{
+ return Database.getQueryLocator(
+    [SELECT Id,Name,Customer_Tier__c,Amount
+    FROM Account 
+    WHERE status = 'Active'
+    WITH USER_MODE ];
+ )
+
+
+
+}
+
+public void execute(Database.BatchableContext bc ,List<Account> acc){
+      String Annual_Revenue;
+      String newtier;
+      Integer total =0;
+      Integer ent=0;
+      Integer med =0;
+      Integer small=0;
+   List<Account> accounts = new List<Account>();
+   for(Account a : acc ){
+    if(a.AnnualRevenue ≥ 10,000,000){
+        a.Customer_Tier__c='Enterprise';
+        ent++;
+    }
+    elseif((a.AnnualRevenue ≥ 1,000,000)
+    && (a.AnnualRevenue <10,000,000) ){
+          a.Customer_Tier__c='Medium';
+          med++;
+
+    }
+    elseif(a.AnnualRevenue << 1,000,000){
+        a.Customer_Tier__c = 'Small';
+        Small++;
+    }
+    else {
+       return 0;
+    }
+    accounts.add(a);
+    total ++;
+
+   }
+   Database.update (accounts,false);
+}
+public void finish (){
+    System.debug('Total' + total);
+    System.debug('Enterprise'+ ent);
+    System.debug('Small'+Small);
+    System.debug('Medium'+ med);
+
+}
+
+
+
+
+
+
+
+
+
+     }
+
+//Question 6c.
+ In order to   prevent hitting governor limits I will use 
+ Database.execute(new Account(),200)
+ so that it stays inside the limit ,as the 
+  SOQL query for async tas is 150 , so 200 is a suitable choice
+  //Question6d.
+ well as I have used Databse.Update it allows partial success  from there 
+ we can find the failed one also by subtracting from 2million - total to get the failed value 

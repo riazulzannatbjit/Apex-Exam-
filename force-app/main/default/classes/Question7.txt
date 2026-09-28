@@ -1,0 +1,60 @@
+Question7a.
+
+ @isTest 
+ private void testing{
+    @isTest
+    private static List <Opportunity>testopp{
+        Opportunity opp = new Opportunity(
+            Nmae =test1, Previous_StageName ='ClosedWon',new_StageName='Prospecting'
+        );
+
+      Opportunity opp = new Opportunity(
+            Nmae =test2, Previous_StageName ='Prospecting',new_StageName = 'closedWon'
+        );
+
+
+
+
+    }
+ }
+ //Question7b.
+ for possitive test set we use the values that validate the methods such as here we will use the data 
+  that valiadtes  like using stageName closedWon , also one with not  the new stage closed won here test1 can be used for negative testcase &test2 for positive testcase 
+
+
+  //Question &c.
+
+  @isTest 
+ private void testing{
+    @isTest
+    private static List <Opportunity>testopp(List<Opportunity>newopp){
+  List<Opportunity>o = new List<Opportunity>();
+       for(Opportunity opp : newOpp){
+        for(Integer i =0; i< 200 ;i++){
+            Opp.name = 'Test' +i;
+            opp.new_StageName = 'Prospecting';
+            opp.Previous_StageName='ClosedWon'
+        }
+        o.add(opp);
+
+       }
+       insert o;
+
+
+
+    }
+ }
+here DML operation outside loop so it is bulk salesforce
+
+
+//Question 7d.
+Test.StartTest();
+Database.execute(newOpportunity(),200);
+Test.stopTest();
+if using Batch Apex then  using execute in the middle of
+start & stopTest
+
+//Question 7e.
+Apex Class meaningful & reliable for production development 
+if the codes are organized correctly also there should be unittesting
+we need to check against positive as well as negative test case also 

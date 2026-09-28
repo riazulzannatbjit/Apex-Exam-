@@ -1,0 +1,35 @@
+//Question2a.
+
+1.using SOQL Query inside loops  is risky
+2.using DML inside for loop (update acc)
+3.Using after update on trigger can cause recusion
+4.Another problem is they can use static variable to compare  oldmap vs new to 
+ update the ones that genuinely needed 
+
+
+ //QUestion2b.
+ These problems can affect salesforce governor limits 
+ as using SOQL or DML inside loop is bad practice , 
+ rather they should have stored it in alist then 
+  do the DML , also for teh query it should be the outside 
+  of for loop.so when updating multiple records it creates 
+  it  crosses the limit .
+
+
+  //Question 2c.
+
+trigger opportunityTrigger  on Opportunity (after insert ,after update){
+
+}
+
+public static List
+
+
+
+
+
+//Question2d.
+ well in the trigger I will only call teh handler class method for the 
+ trigger to fire  whereas all the logics will be inside the handlerclass  that's how it will be 
+  stay cleaned .
+  

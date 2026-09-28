@@ -1,0 +1,40 @@
+
+//Question1a.
+
+public with sharing class getAccount{
+         public static List<Account> getRecordServiceAccount(Id accId){
+            return [SELECT NAME ,
+                     (SELECT Id,Name,Email,Phone From Contacts),
+                     (SELECT Id,Name,StageName,Amount,CloseDate FROM Opportunities),
+                     WHERE AccountId IN : accId
+                     WITH USER_MODE
+                     ];
+
+                      
+
+
+
+
+         }
+}
+
+//Question1b.
+List<List<sObject>> = [FIND 'ABC*' IN NAME FIELDS
+    RETURNING Account(name), Contact(name)
+];
+HERE we have used SOSL which is suitable for searching a text  rather than SOQL 
+SOQL is suitable for  retrieving FIELDS Whereas SOQL is suitable for   searching text.
+
+
+//Question1c.
+The service should be designed using with sharing so that the record level access 
+is  protected & also when query we need to use WITH USER_MODE to repect 
+user permitted access.
+
+
+//Question 1d.
+The service may receive a  list of multiple account Ids  for that we need to use 
+Set which will store the id field Set<Id> = new Set<Id>() in the parameter we can 
+use Set such as 
+public static List<Account> getRecordServiceAccount(Set<Id>  accId)
+so that all the unique values will store without placing SOQL queries inside loops.

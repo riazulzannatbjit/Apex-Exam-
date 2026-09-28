@@ -1,0 +1,29 @@
+
+//Question3a.
+AND (
+    ISPICKVAL(StageName !='ClosedWon')
+    OR(
+        (ISBLaNK(Amount))
+        NOT(AMOUNT>0)
+    )
+)
+
+
+
+//Question3b
+validation rule -> before update->
+before save ->before trigger -> save -> after update ->
+after trigger_> Record Automation _> after update _> after trigger _>
+
+
+ for after update trigger can cause recursion
+
+ //Question3c.
+ Apex Trigger may execute more than once  when using after update trigger 
+  as before update used when the data deosn;ts ave dto the the database yet, 
+  so it may cause recursuon to prevent that we can use 
+  idempotent logic & check old vs new value instaed of generally update .
+
+
+  //question 3d
+  trigger 

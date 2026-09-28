@@ -1,0 +1,39 @@
+//Question 5a.
+they can use Database.insert(leadsToInsert,false);
+so that partial succes can be implemented but using the insert doens;t allow partial success 
+
+
+//Question 5b
+
+try{
+
+Database [] saveresults res = Database.insert(leadsToInsert,False);
+}
+catch(Exception e){
+     SYstem.debug( e.getMessage + 
+           e.getdetails);
+}
+
+
+
+//Question 5c.
+ for meaningful exception handling we can sue try ,catch &finally 
+  where 
+  try{
+    //actual logic
+  }
+  catch(Exception e){
+    System.Debug( e.getMessage);
+  }
+  Finally{
+    System.Debug('done');
+
+  }
+
+  we use finally when we want it to run despite the exception caused 
+
+
+
+  //Question 5d.
+   Error information should be e.getdetails so that the actual error behind this can come & so that support teams can investigate
+individual failed records without relying only on debug logs.
